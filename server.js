@@ -122,8 +122,8 @@ app.use(speedLimiter);
 
 // CORS protection
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'https://yourdomain.com',
-    optionsSuccessStatus: 200
+    origin: process.env.FRONTEND_URL || 'https://localhost:3000',
+    credentials: true
 }));
 
 // Protection against HTTP Parameter Pollution attacks
@@ -260,7 +260,7 @@ app.get('/test-db', async (req, res) => {
       const result = await db.collection('users').insertOne({ test: 'data' });
       res.json({ success: true, result });
     } catch (error) {
-      console.error('Test insert failed:', error);
+      console.error('Test insert failed:', error);``
       res.status(500).json({ success: false, error: error.message });
     }
   });

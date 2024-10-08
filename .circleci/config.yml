@@ -1,0 +1,39 @@
+version: 2.1
+
+executors:
+  node-executor:
+    docker:
+      - image: circleci/node:14
+
+jobs:
+  build:
+    executor: node-executor
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            npm install
+
+      - run:
+          name: Run tests
+          command: |
+            npm test
+
+      - run:
+          name: SonarCloud Scan
+          command: |
+            npm run sonar-scanner
+          environment:
+            SONAR_TOKEN: $SONAR_TOKEN
+            SONAR_HOST_URL: https://sonarcloud.io
+            SONAR_PROJECT_KEY: ST10069986_apds7311-part-2-ST10069986
+            SONAR_PROJECT_NAME: apds7311-part-2-ST10069986
+            SONAR_PROJECT_VERSION: 1.0.0
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build

@@ -1,4 +1,4 @@
-## Secure Login Application
+# APDS Secure Login Application
 
  *** 
  
@@ -55,7 +55,7 @@ npm install
 
 ***
 
-# Install frontend dependencies
+## Install frontend dependencies
 
 cd client
 

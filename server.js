@@ -122,8 +122,8 @@ app.use(speedLimiter);
 
 // CORS protection
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'https://localhost:3000',
-    credentials: true
+    origin: process.env.FRONTEND_URL || 'https://yourdomain.com',
+    optionsSuccessStatus: 200
 }));
 
 // Protection against HTTP Parameter Pollution attacks
@@ -256,14 +256,14 @@ app.post('/api/user', async (req, res) => {
 });
 
 app.get('/test-db', async (req, res) => {
-    try {
-      const result = await db.collection('users').insertOne({ test: 'data' });
-      res.json({ success: true, result });
-    } catch (error) {
-      console.error('Test insert failed:', error);``
-      res.status(500).json({ success: false, error: error.message });
-    }
-  });
+  try {
+    const result = await db.collection('users').insertOne({ test: 'data' });
+    res.json({ success: true, result });
+  } catch (error) {
+    console.error('Test insert failed:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 
 // The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
 app.get('*', (req, res) => {
